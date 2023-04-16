@@ -11,7 +11,7 @@ Computer programmes are useful tools for understanding concepts that are not acc
 
 # About this repository
 In this repository you can find:
-- the main Python code [Essais_v9.py](Essais_v9.py)
+- the main Python code [Heat_Transfert_Polar_Convection.py](Heat_Transfert_Polar_Convection.py)
 - the Matlab code base [] ()
 - the code that allows the differences between the two main codes to be perceived [comparateur3.py](comparateur3.py)
 
