@@ -134,7 +134,7 @@ where $\eta L$ is the linear viscosity, $T_{R}$ is a constant reference stress, 
 
 $T_{II} = (0.5(T_{rr}^2+T{\varphi\varphi}^2)+(T_{r \varphi})^2)^{0.5}$
 
-These two viscosities were averaged by a harmonic mean:
+These two viscosities were averaged by a pseudo-harmonic mean:
 
 $\eta C = \frac{1}{\frac{1}{\eta L}+\frac{1}{\eta PL}}$
 
