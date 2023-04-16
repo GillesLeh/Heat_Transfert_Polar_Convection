@@ -126,13 +126,13 @@ dTdt = dTdt_1 + dTdt_2 + dTdt_3 + dTdt_4 + dTdt_5 + dTdt_6 + dTdt_7
 ⤴️ [_back to code description_](#code-description)
 
 ## Effective viscosities
-The effective viscosity, N, which is used in the above equations can define several types of viscous flow. In the original Matlab code, $\eta L$ represented linear (Newtonian) viscous flow. This represents diffusion creep. In our case, I have added a non-linear viscous flow power law type with the effective viscosity depending on the strain rate. The effective viscosity for a power-law viscous fluid, termed here $\eta PL$, can be written as:
+The effective viscosity, $\eta$, which is used in the above equations can define several types of viscous flow. In the original Matlab code, $\eta L$ represented linear (Newtonian) viscous flow. This represents diffusion creep. In our case, I have added a non-linear viscous flow power law type with the effective viscosity depending on the strain rate. The effective viscosity for a power-law viscous fluid, termed here $\eta PL$, can be written as:
 
-$\eta PL = \eta L (\frac{T_{11}}{T_{R}})\^{1-\eta}$
+$\eta PL = \eta L (\frac{T_{II}}{T_{R}})\^{1-\eta}$
 
 where $\eta L$ is the linear viscosity, $T_{R}$ is a constant reference stress, $\eta$ is the stress exponent, which for rocks is ≥1, and
 
-$T_{11} = (0.5(T_{rr}^2+T{\varphi\varphi}^2)+(T_{r \varphi})^2)^{0.5}$
+$T_{II} = (0.5(T_{rr}^2+T{\varphi\varphi}^2)+(T_{r \varphi})^2)^{0.5}$
 
 These two viscosities were averaged by a harmonic mean:
 
