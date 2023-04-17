@@ -20,8 +20,8 @@ Tbot     = 1                    #température base du manteau
 rhoCp    = 1                    #specific heat capacity
 lam      = 1e-6                 #diffusivité thermique
 ttime    = 1                    #temps total
-s_ref    = 1.5                  #Tau de référence afin d'avoir au début 1 avec la fraction pour power-law
-n_exp    = 3                    #utile pour power-law, à faire varier pour trouver le début de l'activation de la power-law
+s_ref    = 1e-10                  #Tau de référence afin d'avoir au début 1 avec la fraction pour power-law
+n_exp    = 10                    #utile pour power-law, à faire varier pour trouver le début de l'activation de la power-law
 rel      = 0.5
 #variables numériques
 #Angulaire (phi) 
@@ -172,8 +172,8 @@ for it in range(ntime):
 
         if n_exp > 1:
             Eta_pl_it = Eta_pl
-            Eta_pl    = Eta*((tau2/s_ref)**(1-n_exp))
-            Eta_pl    = np.exp(np.log(Eta_pl*rel+np.log(Eta_pl_it)*rel))
+            Eta_pl    = Eta_l*((tau2/s_ref)**(1-n_exp))
+            Eta_pl    = np.exp(np.log(Eta_pl)*rel+np.log(Eta_pl_it)*(1-rel))
             Eta       = 1/(1/Eta_l + 1/Eta_pl) 
 
         # not incompressible, compressible
