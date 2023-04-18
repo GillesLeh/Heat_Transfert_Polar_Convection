@@ -235,12 +235,30 @@ for it in range(ntime):
  
     if np.mod(it, nout) == 0: # postprocessing
         plt.clf() 
-        ax1 = fig.add_subplot(1,1,1)
+        ax1 = fig.add_subplot(2,2,1)
         pc1 = ax1.pcolor(x,y,T,cmap='jet',vmin=-0.1,vmax=0.1) 
         plt.colorbar(pc1,ax=ax1)
         ax1.set_aspect('equal','box')
         plt.title(it)
-        ax1.set_ylabel('T')
+        ax1.set_title('T')
+
+        ax1 = fig.add_subplot(2,2,2)
+        pc1 = ax1.pcolor(xc,yc,taurp,cmap='jet')#,vmin=-0.1,vmax=0.1) 
+        plt.colorbar(pc1,ax=ax1)
+        ax1.set_aspect('equal','box')
+        ax1.set_title('taurp')
+
+        ax2 = fig.add_subplot(2,2,3)
+        pc2 = ax2.pcolor(x,y,taupp,cmap='jet')#,vmin=-0.1,vmax=0.1) 
+        plt.colorbar(pc2,ax=ax2)
+        ax2.set_aspect('equal','box')
+        ax2.set_title('taupp')
+
+        ax2 = fig.add_subplot(2,2,4)
+        pc2 = ax2.pcolor(x,y,taurr,cmap='jet')#,vmin=-0.1,vmax=0.1) 
+        plt.colorbar(pc2,ax=ax2)
+        ax2.set_aspect('equal','box')
+        ax2.set_title('taurr')
         plt.pause(0.1)
         plt.draw()
 toc()
