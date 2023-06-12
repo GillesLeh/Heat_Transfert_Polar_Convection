@@ -113,6 +113,10 @@ Using the energy equation, we can determine the temperature distribution on whic
 
 $\frac{dT}{dt} = -V_{r}\frac{\delta T}{\delta r}-\frac{V_{\varphi}}{r}\frac{\delta T}{\delta\varphi}+\frac{1}{\rho C_{p}}(\frac{\delta}{\delta r}(\lambda(\frac{\delta T}{\delta r})+\frac{\lambda}{r}\frac{\delta T}{\delta r}+\frac{1}{r^2}\frac{\delta}{\delta\varphi}(\lambda(\frac{\delta T}{\delta\varphi}))$
 
+$\frac{dT}{dt} = \underbrace{\boxed{-V_{r}\frac{\delta T}{\delta r}-\frac{V_{\varphi}}{r}\frac{\delta T}{\delta\varphi}}}_{\text{Partie droite}}$
+
+$\underbrace{\boxed{\frac{1}{\rho C_{p}}(\frac{\delta}{\delta r}(\lambda(\frac{\delta T}{\delta r})+\frac{\lambda}{r}\frac{\delta T}{\delta r}+\frac{1}{r^2}\frac{\delta}{\delta\varphi}(\lambda(\frac{\delta T}{\delta\varphi}))))}}_{\text{Formule complète}}$
+
 ```md
 dTdt_1 = - np.maximum(0, Vr[1:-2, 1:-1]) * np.diff(T[:-1, 1:-1], axis=0) / drad 
 dTdt_2 = - np.minimum(0, Vr[2:-1, 1:-1]) * np.diff(T[1:, 1:-1], axis=0) / drad 
