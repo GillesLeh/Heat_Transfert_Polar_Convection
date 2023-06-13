@@ -24,7 +24,7 @@ In this repository you can find:
 * [Effective viscosities](#Effective-viscosities)
 
 ## Equation of state
-Because of the mainly temperature and compositional differences the flow in the mantle is driven by local variation in density. The equation of state, in the form of a linearized equation (LEOS), allows calculation of the effective density times the gravitational acceleration of the system dependent on the temperature:
+Local variations in density direct the flow of matter in the mantle. Depending on the temperature, the effective density multiplied by the gravitational acceleration can be calculated. The understanding of this equation is essential in this model because it is the changes in density which are at the origin of the convection of the mantle (Turcotte et al., 2002)
 
 $\rho_{f}(T) = \rho_{0}(1-\alpha\Delta T + \beta\Delta P)$
 ```md
@@ -35,7 +35,7 @@ But we can ignore the pressure because our material is incompressible.
 ⤴️ [_back to content_](#content)
 
 ## Equation of Mass Conservation
-We then use the continuity equation. In this equation mass is conserved and any change in density must be accompanied by an inflow or outflow of material, as the volume remains constant. 
+we have a system where mass is conserved due to a fixed volume. This equation makes it possible to describe the distribution of the mass and its evolution over time. If mass is conserved throughout the system but density variation is observed, this is due to the divergence of mass flux across a certain surface (Gerya, 2019). 
 
 The continuity equation:
 $\frac{\delta\rho}{\delta t} + div(\rho\vec{v}) = 0,$
@@ -72,7 +72,7 @@ Erp = ((np.diff(Vr[1:-1, :], axis=1)/np.diff(phir[1:-1, :], axis=1) - avr(Vp[:, 
 ⤴️ [_back to code description_](#code-description)
 
 ## Constitutive Equations
-the constitutive equations explain how a material deforms under certain pressures and stresses. The values $\tau_{rr}$ and $\tau_{\varphi\varphi}$ describe the normal stress in the radial and angular directions, while $\tau_{r \varphi}$ describes the shear stress. All three values are determined by these equations:
+The constitutive equation, or flow law, of a viscous material is given by a mathematical relationship between the deviatoric stress and the deviatoric strain rate (Halter et al., 2022). This describes how a material deforms under certain pressures and stresses. The values $\tau_{rr}$ and $\tau_{\varphi\varphi}$ describe the normal stress in the radial and angular directions, while $\tau_{r\varphi}$ describes the shear stress. These three values are determined by the following equations with $\eta$ which corresponds to the viscosity (Gerya, 2019).
 
 $\tau_{rr} = 2\eta(\dot{\xi}_{rr}-\frac{1}{3}\nabla V)$
 
@@ -89,7 +89,7 @@ taurp = 2 * Eta_rp * Erp
 ⤴️ [_back to code description_](#code-description)
 
 ## Equation of Conservation of Linear Momentum 
-We use a force balance to understand the pressure, dynamic stresses, and gravity forces acting on the mantle. Since the mantle is highly viscous, we don't need to consider the effects of inertia. The Navier-Stokes equations are used to describe the behavior of the material, including its elasticity and viscosity. These equations help us understand the specific mechanical properties of the mantle's materials. By relating velocity and strain rate, we can understand how the mantle rock moves and deforms.
+The conservation of linear momentum equation is used to describe the change in velocity and pressure of a moving fluid. Due to the high viscosity of the mantle, we can here ignore inertial forces (Turcotte et al., 2002)
 
 $\frac{dV_r}{dt}= \frac{1}{\rho}(\frac{\delta\sigma_{rr}}{\delta r} + \frac{1}{r}\frac{\delta\tau_{r\varphi}}{\delta\varphi} + \frac{\Delta\sigma}{r} -\rho fg)$
 
@@ -109,13 +109,15 @@ the variables $\delta\sigma_{rr}$ and $\delta\sigma_{\varphi\varphi}$ define the
 ⤴️ [_back to code description_](#code-description)
 
 ## Equation of Energy Conservation
-Using the energy equation, we can determine the temperature distribution on which density and rheology depend. The temperature equations allow calculation of temperature changes by advection and diffusion as well as the update of the model temperature.
+According to Becker et al. (2013) mantle convection is a good example of a system where heat is transported by diffusion and advection. The degree of separation of these two effects is indicated globally by the Rayleigh number, and locally by the Peclet number. The energy equation makes it possible to determine the temporal evolution of the temperature on which the density and the rheology depend.
 
 $\frac{dT}{dt} = -V_{r}\frac{\delta T}{\delta r}-\frac{V_{\varphi}}{r}\frac{\delta T}{\delta\varphi}+\frac{1}{\rho C_{p}}(\frac{\delta}{\delta r}(\lambda(\frac{\delta T}{\delta r})+\frac{\lambda}{r}\frac{\delta T}{\delta r}+\frac{1}{r^2}\frac{\delta}{\delta\varphi}(\lambda(\frac{\delta T}{\delta\varphi}))$
 
-$\frac{dT}{dt} = \underbrace{\boxed{-V_{r}\frac{\delta T}{\delta r}-\frac{V_{\varphi}}{r}\frac{\delta T}{\delta\varphi}}}_{\text{Partie droite}}$
+$\frac{dT}{dt} = \underbrace{\boxed{-V_{r}\frac{\delta T}{\delta r}-\frac{V_{\varphi}}{r}\frac{\delta T}{\delta\varphi}}}_{\text{a}}$
 
-$\underbrace{\boxed{\frac{1}{\rho C_{p}}(\frac{\delta}{\delta r}(\lambda(\frac{\delta T}{\delta r})+\frac{\lambda}{r}\frac{\delta T}{\delta r}+\frac{1}{r^2}\frac{\delta}{\delta\varphi}(\lambda(\frac{\delta T}{\delta\varphi}))))}}_{\text{Formule complète}}$
+$\underbrace{\boxed{\frac{1}{\rho C_{p}}(\frac{\delta}{\delta r}(\lambda(\frac{\delta T}{\delta r})+\frac{\lambda}{r}\frac{\delta T}{\delta r}+\frac{1}{r^2}\frac{\delta}{\delta\varphi}(\lambda(\frac{\delta T}{\delta\varphi}))}}_{\text{b}}$
+
+This equation can be broken down into two parts. A first (a) corresponding to the heat flux due to the advection of the fluid and a second (b) representing the heat flux due to thermal diffusion.
 
 ```md
 dTdt_1 = - np.maximum(0, Vr[1:-2, 1:-1]) * np.diff(T[:-1, 1:-1], axis=0) / drad 
@@ -130,7 +132,7 @@ dTdt = dTdt_1 + dTdt_2 + dTdt_3 + dTdt_4 + dTdt_5 + dTdt_6 + dTdt_7
 ⤴️ [_back to code description_](#code-description)
 
 ## Effective viscosities
-The effective viscosity, $\eta$, which is used in the above equations can define several types of viscous flow. In the original Matlab code, $\eta L$ represented linear (Newtonian) viscous flow. This represents diffusion creep. In our case, I have added a non-linear viscous flow power law type with the effective viscosity depending on the strain rate. The effective viscosity for a power-law viscous fluid, termed here $\eta PL$, can be written as:
+Here we use the same approach as Halter et al. (2022) for the effective viscosity. The term effective viscosity in the case of flow laws means the ratio between the stress and the rate of strain. The effective viscosity, $\eta$, which is used in the equations above can define several types of viscous flow. In the original Matlab code, $\eta $ is constant and therefore represents linear (Newtonian) viscous flow. We call it here $\eta L$. This represents creep by diffusion. The improvement that we brought to this code consists in adding a non-linear viscous flow in power law. In this case, the effective viscosity depends on the strain rate. The combination of the two types of flow concerns ductile rocks. The effective viscosity of a power-law type viscous fluid, here called $\eta PL $, can be written as follows
 
 $\eta PL = \eta L (\frac{T_{II}}{T_{R}})\^{1-\eta}$
 
