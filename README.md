@@ -5,6 +5,7 @@
 * [Objectives](#objectives)
 * [About this repository](#about-this-repository)
 * [Code description](#code-description)
+* [Résultats](#résultats)
 
 # Objectives
 Computer programmes are useful tools for understanding concepts that are not accessible to us. In this contribution I present the equivalence of a Matlab code in Python that allows to compute pressure, velocity, stress and strain fields in a two-dimensional system in cylindrical polar coordinates for a case of bottom-heated convection with an isothermal mantle. 
@@ -154,3 +155,18 @@ if n_exp > 1:
     Eta       = 1/(1/Eta_l + 1/Eta_pl)
 ```
 ⤴️ [_back to code description_](#code-description)
+
+# Résultats
+* [Difference between Python and Matlab code](Difference-between-Python-and-Matlab-code)
+* [Difference with and without power-law](Difference-with-and-without-power-law)
+
+## Difference between Python and Matlab code
+<div style="display: flex;">
+    <img src="image_1700.png" alt="Image 1" width="400" />
+    <img src="image_iteration_400.png" alt="Image 2" width="400" />
+</div>
+
+
+
+## Difference with and without power-law]
+
