@@ -161,12 +161,41 @@ if n_exp > 1:
 * [Difference with and without power-law](Difference-with-and-without-power-law)
 
 ## Difference between Python and Matlab code
+
+Here are some screenshots at different time steps of the Python (left) and Matlab (right) visualizations
+
 <div style="display: flex;">
-    <img src="image_1700.png" alt="Image 1" width="400" />
-    <img src="image_iteration_400.png" alt="Image 2" width="400" />
+    <img src="images_Python\P_image_200.png" alt="Image 1" width="300" />
+    <img src="images_Matlab\image_iteration_400.png" alt="Image 2" width="300" />
 </div>
 
+<div style="margin-top: 100px; display: flex;">
+    <img src="images_Python\P_image_800.png" alt="Image 1" width="300" />
+    <img src="images_Matlab\image_iteration_1000.png" alt="Image 2" width="300" />
+</div>
 
+<div style="margin-top: 100px; display: flex;">
+    <img src="images_Python\P_image_1700.png" alt="Image 1" width="300" />
+    <img src="images_Matlab\image_iteration_1900.png" alt="Image 2" width="300" />
+</div>
 
 ## Difference with and without power-law]
+
+Here are some screenshots at different time steps of the Python without Power-law (left) and Python with Power-law (right) visualizations
+
+<div style="display: flex;">
+    <img src="images_Python\P_image_200.png" alt="Image 1" width="300" />
+    <img src="images_Python_PL\image_200pl.png" alt="Image 2" width="300" />
+</div>
+
+<div style="display: flex;">
+    <img src="images_Python\P_image_800.png" alt="Image 1" width="300" />
+    <img src="images_Python_PL\image_800pl.png" alt="Image 2" width="300" />
+</div>
+
+<div style="display: flex;">
+    <img src="images_Python\P_image_1700.png" alt="Image 1" width="300" />
+    <img src="images_Python_PL\image_1700pl.png" alt="Image 2" width="300" />
+</div>
+
 
