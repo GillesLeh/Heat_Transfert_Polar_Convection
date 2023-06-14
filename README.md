@@ -118,6 +118,9 @@ $\frac{dT}{dt} = \underbrace{\boxed{-V_{r}\frac{\delta T}{\delta r}-\frac{V_{\va
 
 $\underbrace{\boxed{\frac{1}{\rho C_{p}}(\frac{\delta}{\delta r}(\lambda(\frac{\delta T}{\delta r})+\frac{\lambda}{r}\frac{\delta T}{\delta r}+\frac{1}{r^2}\frac{\delta}{\delta\varphi}(\lambda(\frac{\delta T}{\delta\varphi}))}}_{\text{b}}$
 
+$\frac{dT}{dt} = \underbrace{\boxed{-V_{r}\frac{\delta T}{\delta r}-\frac{V_{\varphi}}{r}\frac{\delta T}{\delta\varphi}}}_{\text{a}}+\underbrace{\boxed{\frac{1}{\rho C_{p}}(\frac{\delta}{\delta r}(\lambda(\frac{\delta T}{\delta r})+\frac{\lambda}{r}\frac{\delta T}{\delta r}+\frac{1}{r^2}\frac{\delta}{\delta\varphi}(\lambda(\frac{\delta T}{\delta\varphi}))}}_{\text{b}}$
+
+
 This equation can be broken down into two parts. A first (a) corresponding to the heat flux due to the advection of the fluid and a second (b) representing the heat flux due to thermal diffusion.
 
 ```md
@@ -179,7 +182,7 @@ Here are some screenshots at different time steps of the Python (left) and Matla
     <img src="images_Matlab\image_iteration_1900.png" alt="Image 2" width="300" />
 </div>
 
-## Difference with and without power-law]
+## Difference with and without power-law
 
 Here are some screenshots at different time steps of the Python without Power-law (left) and Python with Power-law (right) visualizations
 
