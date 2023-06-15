@@ -112,7 +112,7 @@ the variables $\delta\sigma_{rr}$ and $\delta\sigma_{\varphi\varphi}$ define the
 ## Equation of Energy Conservation
 According to Becker et al. (2013) mantle convection is a good example of a system where heat is transported by diffusion and advection. The degree of separation of these two effects is indicated globally by the Rayleigh number, and locally by the Peclet number. The energy equation makes it possible to determine the temporal evolution of the temperature on which the density and the rheology depend.
 
-$\frac{dT}{dt} = -V_{r}\frac{\delta T}{\delta r}-\frac{V_{\varphi}}{r}\frac{\delta T}{\delta\varphi}+\frac{1}{\rho C_{p}}(\frac{\delta}{\delta r}(\lambda(\frac{\delta T}{\delta r})+\frac{\lambda}{r}\frac{\delta T}{\delta r}+\frac{1}{r^2}\frac{\delta}{\delta\varphi}(\lambda(\frac{\delta T}{\delta\varphi}))$
+$\frac{dT}{dt} = \underbrace{-V_{r}\frac{\delta T}{\delta r}-\frac{V_{\varphi}}{r}\frac{\delta T}{\delta\varphi}}_a+\underbrace{ \frac{1}{\rho C_p}(\frac{\delta}{\delta r}\left(\lambda(\frac{\delta T}{\delta r}\right)+\frac{\lambda}{r}\frac{\delta T}{\delta r}  +\frac{1}{r^2}\frac{\delta}{\delta\varphi}(\lambda(\frac{\delta T}{\delta\varphi})) }_b$
 
 This equation can be broken down into two parts. A first (a) corresponding to the heat flux due to the advection of the fluid and a second (b) representing the heat flux due to thermal diffusion.
 
