@@ -177,7 +177,7 @@ Here are some screenshots at different time steps of the Python (left) and Matla
 
 <div style="display: flex;">
     <img src="videos\Sc_py_ss_Pl_1.gif" alt="Image 1" width="300" />
-    <img src="videos\Sc_py_ss_Pl_1.gif" alt="Image 2" width="300" />
+    <img src="videos\Sc_Matlab_3000_1.gif" alt="Image 2" width="300" />
 </div>
 
 ## Difference with and without power-law
