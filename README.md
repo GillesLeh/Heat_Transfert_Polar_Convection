@@ -182,6 +182,11 @@ Here are some screenshots at different time steps of the Python (left) and Matla
     <img src="images_Matlab\image_iteration_1900.png" alt="Image 2" width="300" />
 </div>
 
+<div style="display: flex;">
+    <img src="videos\Sc_py_ss_Pl_1.gif" alt="Image 1" width="300" />
+    <img src="videos\Sc_py_av_Pl_1.gif" alt="Image 2" width="300" />
+</div>
+
 ## Difference with and without power-law
 
 Here are some screenshots at different time steps of the Python without Power-law (left) and Python with Power-law (right) visualizations
@@ -202,7 +207,11 @@ Here are some screenshots at different time steps of the Python without Power-la
 </div>
 
 <div style="display: flex;">
-    <video src="videos\vid_fps5.mp4" width="300" controls></video>
-    <video src="videos\vid_fps5.mp4" width="300" controls></video>
+    <img src="videos\Sc_py_ss_Pl_1.gif" alt="Image 1" width="300" />
+    <img src="videos\Sc_py_av_Pl_1.gif" alt="Image 2" width="300" />
 </div>
+
+
+
+
 
