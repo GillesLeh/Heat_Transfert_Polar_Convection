@@ -23,7 +23,7 @@ rhoCp    = 1                    #specific heat capacity
 lam      = 1e-6                 #diffusivité thermique
 ttime    = 1                    #temps total
 s_ref    = 1e-3                 #Tau de référence afin d'avoir au début 1 avec la fraction pour power-law
-n_exp    = 1                   #utile pour power-law, à faire varier pour trouver le début de l'activation de la power-law
+n_exp    = 1                    #utile pour power-law, à faire varier pour trouver le début de l'activation de la power-law
 rel      = 0.1
 #variables numériques
 #Angulaire (phi) 
@@ -35,7 +35,7 @@ nnr  = 101                         #nombre de noeuds
 Lr   = rout                        #longueur radiale
 drad = Lr/(nnr-1)                  #espacemennt radiale
 #densité
-rhog_v = np.ones((nnr,nnp))         #densité initial                      #problème avec nnp.ones (pourtant documentation suivie)    
+rhog_v = np.ones((nnr,nnp))         #densité initial                       
 rhog_v [0:disc,:] = rhog0_dw        #partie inférieur avec différente densité 
 rhog_v [disc:-1,:] = rhog0_up       #partie supérieur avec une densité
 #viscosité avec stress angulaire et radiale
@@ -96,9 +96,9 @@ def tic():
 
 Vr = np.zeros((nnr + 1, nnp))
 Vp = np.zeros((nnr, nnp + 1))
-T = 0.1 * np.exp(-(radn - 3 / 2 * rin) ** 2 * 50 - phin ** 2 * 0. * radn ** 2) * np.sin(phin) + 1.0*(np.random.rand(nnr, nnp) - 0.5)
+T = 0.1 * np.exp(-(radn - 3 / 2 * rin) ** 2 * 50 - phin ** 2 * 0. * radn ** 2) * np.sin(phin) + 1.0*(np.random.rand(nnr, nnp) - 0.5)  #Définis température aléatoirement 
 #T = 0.1 * np.exp(-(radn - 3 / 2 * rin) ** 2 * 50 - phin ** 2 * 0. * radn ** 2) * np.sin(phin)
-T_init = T   #ou T.copy()
+T_init = T  
 
 #preprocessing
 dtit = np.min([drad, dphi])**2 / (np.max(Eta) / np.max(rhog_v)) / 4 / 1e0  #timesteps
@@ -113,11 +113,11 @@ niter  = 1000
 nout   = 10
 k      = 1
 finish = 4000
+
 #Définiton de EtaL et Etapl
 Eta_l = Eta
 Eta_pl = Eta
 
-#counter = 0
 #fonction pour les moyennes
 def avr(U):
     U = 0.5 * (U[:-1, :] + U[1:, :])
@@ -128,7 +128,8 @@ def avp(U):
 def av_N2C(U):
     U = avp(avr(U))
     return U
-
+    
+#Enregistrement .png dans dossier.
 desktop_path = os.path.join(os.environ["HOME"], "Desktop")
 folder_path = os.path.join(desktop_path, "Sc_py_ss_Pl_rdn_1")
 counter = 0
@@ -191,7 +192,7 @@ for it in range(ntime):
             if np.mod(iter, nouter) == 0:
                 print( "iter: %d \t Eta_pl min: %f \t Eta_pl max: %f" % (iter,np.min(Eta_pl), np.max(Eta_pl)) )'''
 
-        #print(tau2.shape)
+
         error = np.max([np.max(np.abs(dVrdt)), np.max(np.abs(dVpdt)), np.max(np.abs(dPdt))])
 
     '''print("time step = %d\terror = %10.3E\tTmin = %10.3E\tTmax = %10.3E\titerations = %d" % (it,error,T.min(),T.max(),iter)) # for print syntax, see: https://www.geeksforgeeks.org/python-output-formatting/
@@ -202,7 +203,7 @@ for it in range(ntime):
     # Thermics------------------------------------------------------------->we use the results from mechanicss to calculate thermics
     dt = np.min([drad / np.max(np.abs(Vr)) / 2 / 1e0, dtdiff])  # change of dt value if dt calculated is smaller than standard
 
-    # Thermo
+    # Equations of energy conservation
     dTdt_1 = - np.maximum(0, Vr[1:-2, 1:-1]) * np.diff(T[:-1, 1:-1], axis=0) / drad 
     dTdt_2 = - np.minimum(0, Vr[2:-1, 1:-1]) * np.diff(T[1:, 1:-1], axis=0) / drad 
     dTdt_3 = - np.maximum(0, Vp[1:-1, 1:-2]) * np.diff(T[1:-1, :-1], axis=1) / dphi / radn[1:-1, 1:-1]
@@ -218,8 +219,8 @@ for it in range(ntime):
     # Polar boundaries conditions-------------------------------------------
     T[-1,:]            = Ttop                                                 # reset of the mantle surface T values
     T[0,  :]           = Tbot                                                 # reset of the mantle bottom T values
-    T[:, -1]           = T[:, 1]                                             # reset of the last angular cell with the second cell (they are superimposed)
-    T[:, 0]            = T[:, -2]                                           # reset of the second-to-last angular cell with the first cell (they are superimposed)
+    T[:, -1]           = T[:, 1]                                              # reset of the last angular cell with the second cell (they are superimposed)
+    T[:, 0]            = T[:, -2]                                             # reset of the second-to-last angular cell with the first cell (they are superimposed)
     
     # save variables--------------------------------------------------------
     #np.savetxt(path +"output_it_"+ str(it) +"_Vr.csv",Vr,delimiter=",")
@@ -235,19 +236,19 @@ for it in range(ntime):
     np.savetxt("output_it_"+ str(it) +"_Tau.csv",tau2,delimiter=",")'''
     # postprocessing=======================================================
     # polar to cartesian conversion-----------------------------------------
-    x = radn*np.cos(phin)                                                      # conversion to cartesian coordinates x
+    x = radn*np.cos(phin)                                                     
     y = radn*np.sin(phin)    
-    xc   = radc*np.cos(phic)               # conversion to cartesian coordinates x
-    yc   = radc*np.sin(phic)                                                  # conversion to cartesian coordinates y
-    xvr  = radr*np.cos(phir)               # conversion to cartesian coordinates x
+    xc   = radc*np.cos(phic)               
+    yc   = radc*np.sin(phic)                                                 
+    xvr  = radr*np.cos(phir)              
     yvr  = radr*np.sin(phir)    
-    xvp  = radp*np.cos(phip)               # conversion to cartesian coordinates x
+    xvp  = radp*np.cos(phip)             
     yvp  = radp*np.sin(phip)    
-    Vx = Vr[1:,:]*np.cos(phir[1:,:]) - Vp[:,1:]*np.sin(phip[:,1:])         # conversion to cartesian coordinates Vx
-    Vy = Vr[1:,:]*np.sin(phir[1:,:]) + Vp[:,1:]*np.cos(phip[:,1:])         # conversion to cartesian coordinates Vy
+    Vx = Vr[1:,:]*np.cos(phir[1:,:]) - Vp[:,1:]*np.sin(phip[:,1:])         
+    Vy = Vr[1:,:]*np.sin(phir[1:,:]) + Vp[:,1:]*np.cos(phip[:,1:])         
     
- 
-    if np.mod(it, nout) == 0: # postprocessing
+    #visualisation
+    if np.mod(it, nout) == 0: 
         plt.clf() 
 
         # plot T
@@ -257,18 +258,20 @@ for it in range(ntime):
         ax1.set_aspect('equal','box')
         ax1.set_title('Température')
 
-        #eta
-        '''ax1 = fig.add_subplot(111)
+        '''#eta
+        ax1 = fig.add_subplot(111)
         pc1 = ax1.pcolor(x,y,np.log10(Eta),cmap='jet') 
         plt.colorbar(pc1,ax=ax1)
         ax1.set_aspect('equal','box')
-        ax1.set_title('Eta [log10]')'''
+        ax1.set_title('Eta [log10]')
+        
         # plot P
-        '''ax1 = fig.add_subplot(3,4,5)
+        ax1 = fig.add_subplot(3,4,5)
         pc1 = ax1.pcolor(x,y,P,cmap='jet') 
         plt.colorbar(pc1,ax=ax1)
         ax1.set_aspect('equal','box')
         ax1.set_title('P')
+        
         # plot Tau2
         ax1 = fig.add_subplot(3,4,9)
         pc1 = ax1.pcolor(x,y,tau2,cmap='jet') 
@@ -282,12 +285,14 @@ for it in range(ntime):
         plt.colorbar(pc1,ax=ax1)
         ax1.set_aspect('equal','box')
         ax1.set_title('Eta [log10]')
+        
         # plot Eta_l
         ax1 = fig.add_subplot(3,4,6)
         pc1 = ax1.pcolor(x,y,np.log10(Eta_l),cmap='jet') 
         plt.colorbar(pc1,ax=ax1)
         ax1.set_aspect('equal','box')
         ax1.set_title('Eta_l [log10]')
+        
         # plot Eta_pl
         ax1 = fig.add_subplot(3,4,10)
         pc1 = ax1.pcolor(x,y,np.log10(Eta_pl),cmap='jet') 
@@ -325,10 +330,11 @@ for it in range(ntime):
         ax4.set_aspect('equal','box')
         ax4.set_title('taurp')'''
         
-        # Title etc...
         fig.suptitle("time step, it = "+ str(it))
         plt.pause(0.1)
         plt.draw()
+        
+        #Sauvegarde en .png
         if it % 10 == 0:
             if it < 100:
                 filename = os.path.join(folder_path, f"image_000{it}.png")
