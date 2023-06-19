@@ -42,7 +42,7 @@ The continuity equation:
 $\frac{\delta\rho}{\delta t} + div(\rho\vec{v}) = 0,$
 
 We can couple this continuity equation with the beta compressibility (1/bulk modulus):
-$\beta = \frac{1}{\rho}(\frac{\delta\rho}{\delta p})$
+$\beta = \frac{1}{\rho}\left(\frac{\delta\rho}{\delta p}\right)$
 
 by combining these two equations we obtain:
 $0 = \frac{d P}{d t}-\frac{1}{\beta}\nabla V$
@@ -62,7 +62,7 @@ $\xi_{\varphi\varphi} = \frac{1}{r}\frac{\delta V_{\varphi}}{\delta \varphi}+\fr
 
 The $\xi_{\varphi r}$ represents the deviatoric tensor of viscous stresses:
 
-$\xi_{\varphi r} = \xi_{r \varphi} = \frac{1}{2}(\frac{\delta V_{r}}{\delta \varphi} + \frac{\delta V_{\varphi}}{\delta r}-\frac{V_{\varphi}}{r})$
+$\xi_{\varphi r} = \xi_{r \varphi} = \frac{1}{2}\left(\frac{\delta V_{r}}{\delta \varphi} + \frac{\delta V_{\varphi}}{\delta r}-\frac{V_{\varphi}}{r}\right)$
 
 ```md
 Err = np.diff(Vr, axis=0)/np.diff(radr, axis=0)
@@ -92,9 +92,9 @@ taurp = 2 * Eta_rp * Erp
 ## Equation of Conservation of Linear Momentum 
 The conservation of linear momentum equation is used to describe the change in velocity and pressure of a moving fluid. Due to the high viscosity of the mantle, we can here ignore inertial forces (Turcotte et al., 2002)
 
-$\frac{dV_r}{dt}= \frac{1}{\rho}(\frac{\delta\sigma_{rr}}{\delta r} + \frac{1}{r}\frac{\delta\tau_{r\varphi}}{\delta\varphi} + \frac{\Delta\sigma}{r} -\rho fg)$
+$\frac{dV_r}{dt}= \frac{1}{\rho}\left(\frac{\delta\sigma_{rr}}{\delta r} + \frac{1}{r}\frac{\delta\tau_{r\varphi}}{\delta\varphi} + \frac{\Delta\sigma}{r} -\rho fg\right)$
 
-$\frac{dV_{\varphi}}{dt} = \frac{1}{\rho}(\frac{1}{r}\frac{\delta\sigma_{\varphi\varphi}}{\delta\varphi} + \frac{\delta\tau_{\varphi}}{\delta r} + 2\frac{\tau_{r\varphi}}{r})$
+$\frac{dV_{\varphi}}{dt} = \frac{1}{\rho}\left(\frac{1}{r}\frac{\delta\sigma_{\varphi\varphi}}{\delta\varphi} + \frac{\delta\tau_{\varphi}}{\delta r} + 2\frac{\tau_{r\varphi}}{r}\right)$
 
 ```md
 dVrdt = 1/rho * (np.diff(Srr, axis=0)/np.diff(radn[:, 1:-1], axis=0) +
@@ -112,7 +112,7 @@ the variables $\delta\sigma_{rr}$ and $\delta\sigma_{\varphi\varphi}$ define the
 ## Equation of Energy Conservation
 According to Becker et al. (2013) mantle convection is a good example of a system where heat is transported by diffusion and advection. The degree of separation of these two effects is indicated globally by the Rayleigh number, and locally by the Peclet number. The energy equation makes it possible to determine the temporal evolution of the temperature on which the density and the rheology depend.
 
-$\frac{dT}{dt} = \underbrace{-V_{r}\frac{\delta T}{\delta r}-\frac{V_{\varphi}}{r}\frac{\delta T}{\delta\varphi}}_a+\underbrace{ \frac{1}{\rho C_p}(\frac{\delta}{\delta r}\left(\lambda(\frac{\delta T}{\delta r}\right)+\frac{\lambda}{r}\frac{\delta T}{\delta r}  +\frac{1}{r^2}\frac{\delta}{\delta\varphi}(\lambda(\frac{\delta T}{\delta\varphi})) }_b$
+$\frac{dT}{dt} = \underbrace{-V_{r}\frac{\delta T}{\delta r}-\frac{V_{\varphi}}{r}\frac{\delta T}{\delta\varphi}}_a+\underbrace{\frac{1}{\rho C{p}}\left(\frac{\delta}{\delta r}\left(\lambda\left(\frac{\delta T}{\delta r}\right)+\frac{\lambda}{r}\frac{\delta T}{\delta r}+\frac{1}{r^2}\frac{\delta}{\delta\varphi}\left(\lambda\left(\frac{\delta T}{\delta\varphi}\right)\right)\right)\right)}_b$
 
 This equation can be broken down into two parts. A first (a) corresponding to the heat flux due to the advection of the fluid and a second (b) representing the heat flux due to thermal diffusion.
 
@@ -131,7 +131,7 @@ dTdt = dTdt_1 + dTdt_2 + dTdt_3 + dTdt_4 + dTdt_5 + dTdt_6 + dTdt_7
 ## Effective viscosities
 Here we use the same approach as Halter et al. (2022) for the effective viscosity. The term effective viscosity in the case of flow laws means the ratio between the stress and the rate of strain. The effective viscosity, $\eta$, which is used in the equations above can define several types of viscous flow. In the original Matlab code, $\eta $ is constant and therefore represents linear (Newtonian) viscous flow. We call it here $\eta L$. This represents creep by diffusion. The improvement that we brought to this code consists in adding a non-linear viscous flow in power law. In this case, the effective viscosity depends on the strain rate. The combination of the two types of flow concerns ductile rocks. The effective viscosity of a power-law type viscous fluid, here called $\eta PL $, can be written as follows
 
-$\eta PL = \eta L (\frac{T_{II}}{T_{R}})\^{1-\eta}$
+$\eta PL = \eta L \left(\frac{T_{II}}{T_{R}}\right)\^{1-\eta}$
 
 where $\eta L$ is the linear viscosity, $T_{R}$ is a constant reference stress, $\eta$ is the stress exponent, which for rocks is ≥1, and
 
